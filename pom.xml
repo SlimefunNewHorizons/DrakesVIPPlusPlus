@@ -38,6 +38,13 @@
     </repositories>
 
     <dependencies>
+        <!-- Paper 26 no longer exposes these JSR-305 annotations transitively. -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
