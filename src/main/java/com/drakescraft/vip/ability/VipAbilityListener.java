@@ -303,7 +303,9 @@ public final class VipAbilityListener implements Listener {
         lightning(player, 6.0, 12.0);
         Location l = player.getLocation();
         l.getWorld().spawnParticle(Particle.EXPLOSION_EMITTER, l, 2);
-        l.getWorld().spawnParticle(Particle.DRAGON_BREATH, l.clone().add(0, 1, 0), 100, 3, 2, 3, 0.05);
+        // Paper 1.21.11 declares DRAGON_BREATH with Float particle data. The
+        // data-less overload throws during the cast and aborts Cataclysm.
+        l.getWorld().spawnParticle(Particle.DRAGON_BREATH, l.clone().add(0, 1, 0), 100, 3, 2, 3, 0.05, 0.0F);
         sound(player, Sound.ENTITY_ENDER_DRAGON_GROWL, 1f, 0.7f);
         sound(player, Sound.ENTITY_WITHER_SPAWN, 0.6f, 1.4f);
     }
