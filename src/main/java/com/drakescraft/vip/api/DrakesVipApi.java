@@ -41,6 +41,14 @@ public final class DrakesVipApi {
         return ready() ? boosterManager.effectiveMultiplier(player, BoostType.MONEY) : 1.0;
     }
 
+    /**
+     * Multiplicador del dinero que paga Jobs: booster de dinero activo por el bono permanente de la
+     * banda VIP. Lo consume DrakesRankup al potenciar los pagos de Jobs. 1.0 si no aplica.
+     */
+    public static double getJobsMoneyMultiplier(Player player) {
+        return ready() ? boosterManager.jobsMoneyMultiplier(player) : 1.0;
+    }
+
     public static double getXpMultiplier(Player player) {
         return ready() ? boosterManager.effectiveMultiplier(player, BoostType.XP) : 1.0;
     }

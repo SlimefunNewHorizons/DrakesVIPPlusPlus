@@ -32,6 +32,8 @@ public final class BoosterManager {
 
     private final List<BoosterDef> definitions = new ArrayList<>();
     private final Map<VipTier.VipBand, Double> vipExtra = new EnumMap<>(VipTier.VipBand.class);
+    /** Bono permanente de dinero de Jobs por banda VIP, independiente de los boosters. */
+    private final Map<VipTier.VipBand, Double> jobsBonus = new EnumMap<>(VipTier.VipBand.class);
 
     public BoosterManager(Logger logger, VipManager vipManager) {
         this.logger = logger;
@@ -42,6 +44,7 @@ public final class BoosterManager {
     public void load(FileConfiguration cfg) {
         definitions.clear();
         vipExtra.clear();
+        jobsBonus.clear();
 
         ConfigurationSection boosters = cfg.getConfigurationSection("boosters");
         if (boosters != null) {
@@ -62,6 +65,11 @@ public final class BoosterManager {
         vipExtra.put(VipTier.VipBand.OLYMPIAN_BASE, extra != null ? extra.getDouble("olympian-base", 0.25) : 0.25);
         vipExtra.put(VipTier.VipBand.OLYMPIAN_HIGH, extra != null ? extra.getDouble("olympian-high", 0.5) : 0.5);
         vipExtra.put(VipTier.VipBand.TITAN, extra != null ? extra.getDouble("titan", 1.0) : 1.0);
+
+        ConfigurationSection jobs = cfg.getConfigurationSection("jobs-bonus");
+        jobsBonus.put(VipTier.VipBand.OLYMPIAN_BASE, jobs != null ? jobs.getDouble("olympian-base", 0.05) : 0.05);
+        jobsBonus.put(VipTier.VipBand.OLYMPIAN_HIGH, jobs != null ? jobs.getDouble("olympian-high", 0.10) : 0.10);
+        jobsBonus.put(VipTier.VipBand.TITAN, jobs != null ? jobs.getDouble("titan", 0.20) : 0.20);
 
         logger.info("Boosters cargados: " + definitions.size());
     }
@@ -119,6 +127,23 @@ public final class BoosterManager {
         }
         double extra = vipExtra.getOrDefault(tier.getBand(), 0.0);
         return global * (1.0 + extra);
+    }
+
+    /** Bono permanente de Jobs de la banda del jugador (0.0 si no es VIP). */
+    public double permanentJobsBonus(Player player) {
+        VipTier tier = vipManager.getTier(player);
+        if (tier == null) {
+            return 0.0;
+        }
+        return jobsBonus.getOrDefault(tier.getBand(), 0.0);
+    }
+
+    /**
+     * Multiplicador del dinero de Jobs: el de dinero con booster (global x extra de banda) por el
+     * bono permanente de la banda. 1.0 para quien no es VIP y no hay booster.
+     */
+    public double jobsMoneyMultiplier(Player player) {
+        return effectiveMultiplier(player, BoostType.MONEY) * (1.0 + permanentJobsBonus(player));
     }
 
     public List<BoosterDef> getDefinitions() {

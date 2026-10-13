@@ -23,3 +23,10 @@ vip-extra:
   olympian-base: 0.25   # tiers 1-6
   olympian-high: 0.5    # tiers 7-10
   titan: 1.0            # tiers 11-15
+
+# Bono PERMANENTE al dinero que pagan los trabajos (Jobs), por banda VIP, con o sin booster.
+# 0.05 => +5%. Se multiplica con el booster de dinero y con el bono de rango de DrakesRankup.
+jobs-bonus:
+  olympian-base: 0.05   # tiers 1-6
+  olympian-high: 0.10   # tiers 7-10
+  titan: 0.20           # tiers 11-15
