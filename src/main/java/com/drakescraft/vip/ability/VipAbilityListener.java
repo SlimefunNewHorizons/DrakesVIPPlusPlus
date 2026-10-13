@@ -271,7 +271,7 @@ public final class VipAbilityListener implements Listener {
 
     private void solarFlare(Player player) {
         Location l = player.getLocation();
-        l.getWorld().spawnParticle(Particle.FLASH, l.clone().add(0, 1, 0), 2);
+        l.getWorld().spawnParticle(Particle.FLASH, l.clone().add(0, 1, 0), 2, 0, 0, 0, 0, org.bukkit.Color.WHITE);
         l.getWorld().spawnParticle(Particle.FLAME, l, 120, 3, 1, 3, 0.05);
         sound(player, Sound.ENTITY_BLAZE_SHOOT, 1f, 0.5f);
         sound(player, Sound.ITEM_FIRECHARGE_USE, 1f, 0.7f);
