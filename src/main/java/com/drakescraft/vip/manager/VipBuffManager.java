@@ -80,17 +80,21 @@ public final class VipBuffManager {
     /** Efecto pasivo con sabor mitologico propio de cada dios. */
     private java.util.List<String> godPassives(VipTier tier) {
         return switch (tier) {
+            case HERCULES -> java.util.List.of("STRENGTH:0");
             case HESTIA -> java.util.List.of("FIRE_RESISTANCE:0");
             case HERMES -> java.util.List.of("SPEED:1");
             case HEFESTO -> java.util.List.of("FIRE_RESISTANCE:0", "HASTE:0");
             case ARTEMISA -> java.util.List.of("NIGHT_VISION:0", "LUCK:0");
+            case AFRODITA -> java.util.List.of("REGENERATION:0", "LUCK:0");
+            case ZEUS -> java.util.List.of("RESISTANCE:0", "SPEED:0");
+            case THOR -> java.util.List.of("STRENGTH:0", "FIRE_RESISTANCE:0");
+            case ANUBIS -> java.util.List.of("NIGHT_VISION:0", "RESISTANCE:0");
             case POSEIDON -> java.util.List.of("WATER_BREATHING:0", "DOLPHINS_GRACE:0");
+            case TITAN_JAPETO -> java.util.List.of("HASTE:1");
             case TITAN_OCEANO -> java.util.List.of("WATER_BREATHING:0", "CONDUIT_POWER:0", "DOLPHINS_GRACE:0");
             case TITAN_HIPERION -> java.util.List.of("FIRE_RESISTANCE:0", "NIGHT_VISION:0");
-            case TITAN_JAPETO -> java.util.List.of("HASTE:1");
             case TITAN_CRONOS -> java.util.List.of("HASTE:0");
             case TITAN_CAOS -> java.util.List.of("FIRE_RESISTANCE:0", "NIGHT_VISION:0", "WATER_BREATHING:0");
-            default -> java.util.List.of();
         };
     }
 
