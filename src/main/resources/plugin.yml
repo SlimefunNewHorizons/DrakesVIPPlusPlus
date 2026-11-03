@@ -2,7 +2,7 @@ name: DrakesVIPPlusPlus
 version: '${project.version}'
 main: com.drakescraft.vip.DrakesVipPlugin
 api-version: '1.21'
-author: DrakesCraft-Labs
+author: SlimefunNewHorizons
 description: Perks activos por rango VIP (15 tiers) + booster de fin de semana. Lee LuckPerms; no toca la entrega Tebex de Odysseia.
 depend: [LuckPerms]
 softdepend: [Vault, PlaceholderAPI, AuraSkills, Odysseia]
